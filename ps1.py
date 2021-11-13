@@ -33,7 +33,27 @@ Finally, we can make an enumerated list:
 3. Item 3
 
  ''')
+# This is *question 0* for [problem set 1](https://jbhender.github.io/Stats507/F21/ps1.html) of [Stats 507](https://jbhender.github.io/Stats507/F21/).
+#  > #### Question 0 is about Markdown.
 
+# The next question is about the **Fibonnaci sequence**, $ F_n=F_{'n-1'}+F_{'n-2'}$. In part **a** we will define a Python function `fib_rec()`.
+
+# Below is a …
+
+# ### Level 3 Header
+# Next, we can make a bulleted list:
+
+# - Item 1
+
+#     - detail 1
+#     - detail 2
+# - Item 2
+
+# Finally, we can make an enumerated list:
+
+# 1. Item 1
+# 2. Item 2
+# 3. Item 3
 
 ## Q1
 def fib_rec(n):
@@ -285,7 +305,7 @@ def display_Psc(n):
 display_Psc(10)
 
 
-## Q3
+# # Q3
 # a
 
 def pe(data, ci = None,precision = None):
@@ -359,9 +379,6 @@ def CI(data ,ci,method = None,precision = None):
                                                                 map['lwr'])
                 print(str1)
                 return map, str1
-
-# testing
-# CI([1,0,1,0,0,0,0,0,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1], ci = 0.95, method = 1)
 
     # method 2
         while method == 2:
@@ -440,11 +457,21 @@ def generate_table(precision = None):
 df_result = generate_table(3)
 df_result.index = [x for x in (0.9,0.95,0.99)]
 show(df_result)
-print(df_result)
-            
-            
-            
 
+# Added width comparison
+import re
+df_wid = {}
+for row in df_result.index:
+    zeros = np.zeros(5)
+    for i, method in enumerate(df_result.columns):
+        array = np.array(re.findall(r'\d+\.\d+',df_result.loc[row][method]),dtype = 'float')
+        width = np.abs(array[0]-array[1])
+        zeros[i] = width
+    df_wid[row] = zeros
 
+df_wid = pd.DataFrame(df_wid, index=df_result.columns)
 
-
+for col in df_wid.columns:
+    print('The smallest width interval method for', str(col*100)+'%',' CI is',
+          df_wid[[col]].idxmin().to_list()[0], 
+          'width = ',round(df_wid.loc[df_wid[[col]].idxmin().to_list()[0],col],3))
