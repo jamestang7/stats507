@@ -10,3 +10,11 @@
 [Link notebook](./ps6Q1.ipynb) <br>
 [Link to ps6](https://jbhender.github.io/Stats507/F21/ps/ps6.html)
 
+# writeup
+`git init` <br>
+`git add README.md ps6Q1.ipynb` <br>
+`git commit -m "first commit"`<br>
+`git branch -M main`<br>
+`git remote add origin https://github.com/jamestang7/stats507.git` <br>
+`git push -u origin main`<br>
+
